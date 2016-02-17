@@ -16,10 +16,16 @@ app.get('/', function(request, response) {
 });
 
 app.get('/cool', function(req, res) {
-	res.send(cool());
+	var output = '';
+	var times  = process.env.COOL_TIMES || 1;
+
+	for (var i = 0; i < times; i++) {
+		output += ('<div>' + cool() + '</div>');
+	}
+	
+	res.send(output);
 });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-
